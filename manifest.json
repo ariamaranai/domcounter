@@ -1,0 +1,18 @@
+{
+  "manifest_version": 3,
+  "name": "domcounter",
+  "version": "0",
+  "description": "Counts DOM elements",
+  "icons": {
+    "128": "128.png"
+  },
+  "permissions": [
+    "userScripts"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "action": {
+    "default_popup": "popup.htm"
+  }
+}
