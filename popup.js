@@ -3,8 +3,7 @@ chrome.tabs.query({ active: !0, currentWindow: !0 }, tab =>
     target: { tabId: tab[0].id },
     js: [{ code:
 `(() => {
-  let d = document;
-  let walker = d.createTreeWalker(d.documentElement, 133);
+  let walker = document.createTreeWalker(document.documentElement, 133);
   let elementCounter = 0;
   let textCounter = 0;
   let commentCounter = 0;
