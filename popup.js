@@ -3,13 +3,13 @@ chrome.tabs.query({ active: !0, currentWindow: !0 }, tab =>
     target: { tabId: tab[0].id },
     js: [{ code:
 `(() => {
-  let walker = document.createTreeWalker(document.documentElement, 133);
+  let x = document;
+  let walker = x.createTreeWalker(x.documentElement, 133);
   let elementCounter = 0;
   let textCounter = 0;
   let commentCounter = 0;
   let tagCounter = {};
   let { currentNode } = walker;
-  let x;
 
   while (
     currentNode = walker.nextNode(
@@ -27,10 +27,12 @@ chrome.tabs.query({ active: !0, currentWindow: !0 }, tab =>
     "</u>\\nCOMMENT_NODE: <u>" + commentCounter + "</u>\\n\\n";
   let entries = Object.entries(tagCounter).sort((a, b) => a[1] < b[1] || -1);
   let i = 0;
+  
   while (
     html += (x = entries[i])[0] + ": <u>" + x[1] + "</u>\\n",
     ++i < entries.length
   );
+  
   return html;
 })();`
     }]
