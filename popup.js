@@ -21,7 +21,7 @@ chrome.tabs.query({ active: !0, currentWindow: !0 }, tab =>
     )
   );
 
-  let html = "TOTAL: <u>" + (elementCounter + textCounter + commentCounter) + "</u>\\n\\n" +
+  let html = "TOTAL: <u>" + (elementCounter + textCounter + commentCounter) + "</u>\\n" +
     "ELEMENT_NODE: <u>" + elementCounter +
     "</u>\\nTEXT_NODE: <u>" + textCounter +
     "</u>\\nCOMMENT_NODE: <u>" + commentCounter + "</u>\\n\\n";
