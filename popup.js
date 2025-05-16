@@ -8,31 +8,30 @@ chrome.tabs.query({ active: !0, currentWindow: !0 }, tab =>
   let textCounter = 0;
   let commentCounter = 0;
   let tagCounter = {};
+  let { currentNode } = walker;
+  let x;
 
-  while (walker.nextNode()) {
-    let { currentNode } = walker;
-    let { nodeType } =  currentNode;
-    if (nodeType == 1) {
-      let k = currentNode.tagName.toLowerCase();
-      let n = tagCounter[k];
-      tagCounter[k] = n ? n + 1 : 1;
-      ++elementCounter;
-    } else if (nodeType == 3)
-      ++textCounter;
-    else
-      ++commentCounter;
-  }
+  while (
+    currentNode = walker.nextNode(
+      (x = currentNode.nodeType) == 1
+        ? (tagCounter[x = currentNode.tagName.toLowerCase()] ??= 0, ++tagCounter[x], ++elementCounter)
+        : x == 3
+          ? ++textCounter
+          : ++commentCounter
+    )
+  );
 
-  return "element: <u>" +
-    elementCounter +
-    "</u>\\ntext: <u>" +
-    textCounter +
-    "\\n</u>comment: <u>" +
-    commentCounter +
-    "</u>\\n\\n" +
-    JSON.stringify(Object.fromEntries(
-      Object.entries(tagCounter).sort((a, b) => b[0] < a[0] ? 1 : -1))
-    ).slice(1, -1).replaceAll('"', "").replaceAll(",", "</u>\\n").replaceAll(":", ": <u>");
+  let html = "TOTAL: <u>" + (elementCounter + textCounter + commentCounter) + "</u>\\n\\n" +
+    "ELEMENT_NODE: <u>" + elementCounter +
+    "</u>\\nTEXT_NODE: <u>" + textCounter +
+    "</u>\\nCOMMENT_NODE: <u>" + commentCounter + "</u>\\n\\n";
+  let entries = Object.entries(tagCounter).sort((a, b) => a[1] < b[1] || -1);
+  let i = 0;
+  while (
+    html += (x = entries[i])[0] + ": <u>" + x[1] + "</u>\\n",
+    ++i < entries.length
+  );
+  return html;
 })();`
     }]
   }).then(results =>
