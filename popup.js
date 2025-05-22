@@ -21,22 +21,28 @@ chrome.tabs.query({ active: !0, currentWindow: !0 }, tab =>
     )
   );
 
-  let html = "TOTAL: <u>" + (elementCounter + textCounter + commentCounter) + "</u>\\n" +
-    "ELEMENT_NODE: <u>" + elementCounter +
-    "</u>\\nTEXT_NODE: <u>" + textCounter +
-    "</u>\\nCOMMENT_NODE: <u>" + commentCounter + "</u>\\n\\n";
+  let left = "";
+  let right =
+    (elementCounter + textCounter + commentCounter) + "\\n" +
+    elementCounter + "\\n" +
+    textCounter + "\\n" +
+    commentCounter + "\\n\\n";
   let entries = Object.entries(tagCounter).sort((a, b) => a[1] < b[1] || -1);
   let i = 0;
-  
+
   while (
-    html += (x = entries[i])[0] + ": <u>" + x[1] + "</u>\\n",
+    left += (x = entries[i])[0] + "\\n",
+    right += x[1] + "\\n",
     ++i < entries.length
   );
-  
-  return html;
+  return [left += "\\n ", right];
 })();`
     }]
-  }).then(results =>
-    document.body.innerHTML = results[0].result
-  ).catch(() => 0)
+  }).then(results => {
+    if (results &&= results[0].result) {
+      let { body } = document;
+      body.firstChild.textContent += results[0];
+      body.lastChild.textContent += results[1];
+    }
+  }).catch(() => 0)
 );
