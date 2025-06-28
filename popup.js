@@ -7,5 +7,5 @@ chrome.tabs.query({ active: !0, currentWindow: !0 }, async tab => {
     let { body } = document;
     body.firstChild.textContent += result[0];
     body.lastChild.textContent += result[1];
-  } catch (e) {}
+  } catch {}
 });
