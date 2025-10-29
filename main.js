@@ -27,5 +27,5 @@
     ++i < entries.length
   );
 
-  return [left += "\n ", right];
+  return [left + "\n ", right];
 })();
