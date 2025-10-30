@@ -25,6 +25,5 @@
     right += node[1] + "\n",
     ++i < entries.length
   );
-
   return [left + "\n ", right];
 })();
