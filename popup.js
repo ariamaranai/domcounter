@@ -6,9 +6,8 @@ chrome.tabs.query({ active: !0, currentWindow: !0 }, async tab => {
       js: [{ file: "main.js" }]
     }))[0];
     let i = 0;
-    while (
+    while (i < result.length)
       d.body.appendChild(d.createElement("p")).textContent = result[i][0] + "\n" + result[i][1],
-      ++i < result.length
-    );
+      ++i;
   } catch {}
 });
