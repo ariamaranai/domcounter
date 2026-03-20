@@ -1,9 +1,10 @@
 chrome.tabs.query({ active: !0, currentWindow: !0 }, async tab => {
   try {
     let d = document;
-    let { result } = (await chrome.userScripts.execute({
+    let { result } = (await chrome.scripting.executeScript({
       target: { tabId: tab[0].id },
-      js: [{ file: "main.js" }]
+      world: "MAIN",
+      files: ["main.js"]
     }))[0];
     let i = 0;
     while (i < result.length)
