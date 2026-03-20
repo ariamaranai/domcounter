@@ -7,7 +7,7 @@
     "128": "128.png"
   },
   "permissions": [
-    "userScripts"
+    "scripting"
   ],
   "host_permissions": [
     "<all_urls>"
